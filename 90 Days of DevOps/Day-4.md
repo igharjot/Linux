@@ -32,6 +32,6 @@ pgrep ssh
 systemctl status ssh  
 systemctl restart ssh  
 journalctl -u ssh -xe  
-systemctl status ssh  
+systemctl status ssh
 
 ---
