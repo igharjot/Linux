@@ -1,1 +1,1 @@
-#Day 06 – Linux Fundamentals: Read and Write Text Files
+# Day-6 – Linux Fundamentals: Read and Write Text Files
