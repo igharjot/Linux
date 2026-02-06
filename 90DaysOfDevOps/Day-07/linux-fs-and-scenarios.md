@@ -86,5 +86,110 @@
 
 # PART-2: Scenario-Based Practice
 
-## Scenario - Check if a service is running.
+**Scenario 1: Service Not Starting** 
+```
+A web application service called 'myapp' failed to start after a server reboot.
+What commands would be run to diagnose the issue?
+Write at least 4 commands in order.
+```
+```
+Step 1: systemctl status myapp
+Why: It shows if the service is active, failed, or stopped.
 
+Step 2: systemctl is-enabled myapp
+Why: To know if it will start automatically after reboot.
+
+Step 3: sudo systemctl enablemyapp
+Why: This command will enable the myapp.service.
+
+Step 4: journalctl -u myapp -n 50
+Why: This command lists all the activities of the myapp.service. 
+```
+
+---
+
+**Scenario 2: High CPU Usage** 
+```
+Your manager reports that the application server is slow.
+You SSH into the server. What commands would be run to identify
+which process is using high CPU?
+```
+```
+Commands used to identify which process is using high CPU are:
+- top
+- htop
+- ps
+- pidstat -u
+
+Command used to kill the high CPU-consuming processes:
+- kill <PID>
+```
+
+---
+
+**Scenario 3: Finding Service Logs** 
+```
+A developer asks: "Where are the logs for the 'docker' service?"
+The service is managed by systemd.
+What commands would be used?
+```
+```
+1️⃣ To view logs of a container-
+docker logs <container_name_or_id>
+
+2️⃣ Follow logs (live)
+docker logs -f <container_name_or_id>
+
+3️⃣ Search logs using grep
+docker logs <container_name_or_id> | grep "error"
+
+4️⃣ Show logs with timestamps
+docker logs --timestamps <container_name_or_id>
+
+5️⃣ Logs since a specific time
+docker logs --since 10m <container_name_or_id>
+docker logs --since "2026-02-06T10:00:00" <container_name_or_id>
+
+6️⃣ Limit number of log lines
+docker logs --tail 100 <container_name_or_id>
+
+7️⃣ Combine options (real-world command)
+docker logs --since 30m --tail 200 <container_name_or_id> | grep -i error
+
+8️⃣ Find container ID or name
+docker ps
+docker ps -a
+
+9️⃣ Search Docker daemon logs (host level)
+sudo journalctl -u docker
+sudo journalctl -u docker -f
+sudo journalctl -u docker | grep error
+```
+
+---
+
+**Scenario 4: File Permissions Issue** 
+```
+A script at /home/user/backup.sh is not executing.
+When you run it: ./backup.sh
+You get: "Permission denied"
+What commands would you use to fix this?
+```
+**Step-by-step solution structure:**
+```
+Step 1: Check current permissions
+Command: ls -l /home/user/backup.sh
+Look for: -rw-r--r-- (notice no 'x' = not executable)
+
+Step 2: Add execute permission
+Command: chmod +x /home/user/backup.sh
+
+Step 3: Verify
+Command: ls -l /home/user/backup.sh
+Look for: -rwxr-xr-x (notice 'x' = executable)
+
+Step 4: Running it
+Command: ./backup.sh
+```
+
+---
